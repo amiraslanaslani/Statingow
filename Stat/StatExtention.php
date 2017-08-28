@@ -1,8 +1,8 @@
 <?php
-class StatExtention implements Extentionable{
-  protected function getClientJS(){}
-  protected function doOnPeriodProcess($DatabaseConnection){}
-  protected function doOnSaveUserdata($DataSendedByClient){}
+class StatExtention{
+  public function getClientJS(){}
+  public function doOnPeriodProcess($DatabaseConnection){}
+  public function doOnSaveUserdata($DataSendedByClient){}
 }
 
 ?>

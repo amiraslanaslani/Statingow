@@ -5,12 +5,12 @@ require_once __DIR__ . '/StatExtention.php';
 class Stat extends DatabaseConnected
 {
   private $Extentions = array();
-  public const tmpTable = '';
-  public const primaryTable = '';
+  public const tmpTable = 'a';
+  public const primaryTable = 'b';
 
   function saveUserData($DataSendedByClient){
     foreach ($this->Extentions as $Extention) {
-      $Extention->doOnSaveUserdata(&$DataSendedByClient);
+      $Extention->doOnSaveUserdata($DataSendedByClient);
     }
   }
 
@@ -23,20 +23,12 @@ class Stat extends DatabaseConnected
     }
   }
 
-  function loadJSClient(){
+  function loadClientJS(){
     $JSClient = file_get_contents(__DIR__ . "/Client.js");
     foreach ($this->Extentions as $Extention) {
-      $JSClient .= $Extention->getClientJS();
+      $JSClient .= $Extention->getClientJS() . "\n\r";
     }
-  }
-
-  function getAllCollectedDataAlongPeriod(){
-    $Result = $this->DB->query("");
-    return &$Result;
-  }
-
-  function checkPeriodEnds(){
-
+    return $JSClient;
   }
 
   function periodProcess(){
