@@ -2,5 +2,5 @@
 $DB = new mysqli( 'localhost',
                   'root',
                   '',
-                  'tst');
+                  'ghodsi_stat');
 ?>

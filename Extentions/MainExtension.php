@@ -1,6 +1,6 @@
 <?php
 
-class MainExtention extends StatExtention
+class MainExtension extends StatExtension
 {
   private $URL;
   private $DB;
@@ -11,13 +11,16 @@ class MainExtention extends StatExtention
     $this->URL = $URL;
   }
   public function doOnPeriodProcess($DatabaseConnection){
-
+    echo 'All Removed From TMP';
+    //$this->DB->query("DELETE FROM `" + MainExtention::tmpTable + "` WHERE 1");
   }
   public function doOnSaveUserdata($DataSendedByClient){
     $url = $_POST['url'];
     $ip = getRealIpAddr();
 
-    $this->DB->query("INSERT INTO `" . Stat::tmpTable . "` (`url`, `ip`, `date`, `time`) VALUES ('{$url}','{$ip}',CURDATE(),CURTIME())");
+    $this->DB->query("INSERT INTO `" . MainExtention::tmpTable . "`
+                      (`url`, `ip`, `date`, `time`) VALUES
+                      ('{$url}','{$ip}',CURDATE(),CURTIME())");
   }
   public function getClientJS(){
     return "

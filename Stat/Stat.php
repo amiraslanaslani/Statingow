@@ -1,22 +1,20 @@
 <?php
 require_once __DIR__ . '/DatabaseConnected.php';
-require_once __DIR__ . '/StatExtention.php';
+require_once __DIR__ . '/StatExtension.php';
 
 class Stat extends DatabaseConnected
 {
-  private $Extentions = array();
-  public const tmpTable = 'a';
-  public const primaryTable = 'b';
+  private $Extensions = array();
 
   function saveUserData($DataSendedByClient){
-    foreach ($this->Extentions as $Extention) {
+    foreach ($this->Extensions as $Extension) {
       $Extention->doOnSaveUserdata($DataSendedByClient);
     }
   }
 
-  function addExtention($Extention){
-    if(is_subclass_of($Extention,'StatExtention')){
-      $this->Extentions[] = $Extention;
+  function addExtention($Extension){
+    if(is_subclass_of($Extension,'StatExtension')){
+      $this->Extensions[] = $Extension;
     }
     else{
       throw new Exception("This is not an extention!", 1);
@@ -25,16 +23,17 @@ class Stat extends DatabaseConnected
 
   function loadClientJS(){
     $JSClient = file_get_contents(__DIR__ . "/Client.js");
-    foreach ($this->Extentions as $Extention) {
-      $JSClient .= $Extention->getClientJS() . "\n\r";
+    foreach ($this->Extensions as $Extension) {
+      $JSClient .= $Extension->getClientJS() . "\n\r";
     }
     return $JSClient;
   }
 
   function periodProcess(){
-    foreach ($this->Extentions as $Extention) {
-      $Extention->doOnPeriodProcess($this->DB);
+    foreach ($this->Extensions as $Extension) {
+      $Extension->doOnPeriodProcess($this->DB);
     }
+
   }
 }
 
