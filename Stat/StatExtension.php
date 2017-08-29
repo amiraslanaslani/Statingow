@@ -4,7 +4,7 @@ class StatExtension{
   public const primaryTable = 'primary';
   public function getClientJS(){}
   public function doOnPeriodProcess($DatabaseConnection){}
-  public function doOnSaveUserdata($DataSendedByClient){}
+  public function doOnSaveUserdata(){}
 }
 
 ?>

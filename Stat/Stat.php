@@ -6,9 +6,9 @@ class Stat extends DatabaseConnected
 {
   private $Extensions = array();
 
-  function saveUserData($DataSendedByClient){
+  function saveUserData(){
     foreach ($this->Extensions as $Extension) {
-      $Extention->doOnSaveUserdata($DataSendedByClient);
+      $Extension->doOnSaveUserdata();
     }
   }
 

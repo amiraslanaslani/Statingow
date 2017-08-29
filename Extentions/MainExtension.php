@@ -14,28 +14,32 @@ class MainExtension extends StatExtension
     echo 'All Removed From TMP';
     //$this->DB->query("DELETE FROM `" + MainExtention::tmpTable + "` WHERE 1");
   }
-  public function doOnSaveUserdata($DataSendedByClient){
-    $url = $_POST['url'];
+  public function doOnSaveUserdata(){
+    $url = isset($_POST['url'])?$_POST['url']:'';
     $ip = getRealIpAddr();
 
-    $this->DB->query("INSERT INTO `" . MainExtention::tmpTable . "`
+    $this->DB->query("INSERT INTO `" . MainExtension::tmpTable . "`
                       (`url`, `ip`, `date`, `time`) VALUES
                       ('{$url}','{$ip}',CURDATE(),CURTIME())");
+    echo "INSERT INTO `" . MainExtension::tmpTable . "`
+                      (`url`, `ip`, `date`, `time`) VALUES
+                      ('{$url}','{$ip}',CURDATE(),CURTIME())";
   }
   public function getClientJS(){
     return "
-      var Parameters = {
-        url: statedPage
-      }
       function sendStat(statedPage){
+        var Parameters = {
+          url: statedPage
+        }
         var ajax = $.post(
           '{$this->URL}/?get',
           Parameters
         )
+
       }
-      $(function(){
-        sendStat(window.location);
-      }
+      $(document).ready(function($){
+        sendStat(window.location.href);
+      });
     ";
   }
 }
