@@ -11,6 +11,14 @@ class MainExtension extends StatExtension
     $this->URL = $URL;
   }
   public function doOnPeriodProcess($DatabaseConnection){
+    $this->DB->query("INSERT INTO `days_view` (`date`, `view`)
+                      SELECT `date`,COUNT(DISTINCT `ip`)
+                      FROM `tmp`;
+                      
+                      INSERT INTO `each_page_view` (`date`, `url`, `view`)
+                      SELECT `date`,`url`,COUNT(`ip`)
+                      FROM `tmp`
+                      GROUP BY `url`;");
     echo 'All Removed From TMP';
     //$this->DB->query("DELETE FROM `" + MainExtention::tmpTable + "` WHERE 1");
   }
