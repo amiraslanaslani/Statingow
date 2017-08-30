@@ -2,7 +2,7 @@
 PHP Website Statistics Script
 
 ## How it works?
-System created a JS content (at "URL/?client") that loaded on pages and send information to the server (on "URL/?get"). After a period collected information on database is processed with an script that run from server and new information is saved in database again.
+System create a JS content (at "URL/?client") that loaded on pages and send information to the server (on "URL/?get"). After a period collected information on database is processed with an script that run from server and new information is saved in database again.
 Command that executed from server:
 ```
 $ php /Path/To/index.php --period

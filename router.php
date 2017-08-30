@@ -8,4 +8,7 @@ elseif(isset($_GET['client'])) {
 elseif(isset($argv[1]) && $argv[1] == '--period') {
   $pageToLoad = 'Control/period.php';
 }
+else{
+  throw new HttpException(404);
+}
 ?>
