@@ -2,8 +2,11 @@
 if(isset($_GET['get'])){
   $pageToLoad = 'Control/get.php';
 }
-elseif(isset($_GET['client'])) {
+elseif(isset($_GET['client'])){
   $pageToLoad = 'Control/client.php';
+}
+elseif(isset($_GET['api'])){
+  $pageToLoad = 'Control/api.php';
 }
 elseif(isset($argv[1]) && $argv[1] == '--period') {
   $pageToLoad = 'Control/period.php';

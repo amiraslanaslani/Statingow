@@ -6,13 +6,13 @@ class Stat extends DatabaseConnected
 {
   private $Extensions = array();
 
-  function saveUserData(){
+  public function saveUserData(){
     foreach ($this->Extensions as $Extension) {
       $Extension->doOnSaveUserdata();
     }
   }
 
-  function addExtention($Extension){
+  public function addExtention($Extension){
     if(is_subclass_of($Extension,'StatExtension')){
       $this->Extensions[] = $Extension;
     }
@@ -21,7 +21,7 @@ class Stat extends DatabaseConnected
     }
   }
 
-  function loadClientJS(){
+  public function loadClientJS(){
     $JSClient = file_get_contents(__DIR__ . "/Client.js");
     foreach ($this->Extensions as $Extension) {
       $JSClient .= $Extension->getClientJS() . "\n\r";
@@ -29,11 +29,18 @@ class Stat extends DatabaseConnected
     return $JSClient;
   }
 
-  function periodProcess(){
+  public function periodProcess(){
     foreach ($this->Extensions as $Extension) {
       $Extension->doOnPeriodProcess($this->DB);
     }
+  }
 
+  public function getApiOutput(){
+    $output = array();
+    foreach ($this->Extensions as $Extension) {
+      $Extension->setAPIOutput(&$output);
+    }
+    return json_encode($output);
   }
 }
 
