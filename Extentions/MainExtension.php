@@ -10,6 +10,7 @@ class MainExtension extends StatExtension
     $this->DB = $DB;
     $this->URL = $URL;
   }
+
   public function doOnPeriodProcess($DatabaseConnection){
     $this->DB->query("INSERT INTO `days_view` (`date`, `view`)
                       SELECT `date`,COUNT(DISTINCT `ip`)
@@ -23,6 +24,7 @@ class MainExtension extends StatExtension
     echo 'All Removed From TMP';
     //$this->DB->query("DELETE FROM `" + MainExtention::tmpTable + "` WHERE 1");
   }
+
   public function doOnSaveUserdata(){
     $url = isset($_POST['url'])?$_POST['url']:'';
     $ip = getRealIpAddr();
@@ -34,6 +36,7 @@ class MainExtension extends StatExtension
                       (`url`, `ip`, `date`, `time`) VALUES
                       ('{$url}','{$ip}',CURDATE(),CURTIME())";
   }
+
   public function getClientJS(){
     return "
       function sendStat(statedPage){
@@ -50,6 +53,38 @@ class MainExtension extends StatExtension
         sendStat(window.location.href);
       });
     ";
+  }
+
+  public function setAPIOutput(& $output){
+    $output['PagesVisits'] = $this->getAllPagesVisits();
+    $output['WebsiteVisits'] = $this->getWebsiteVisits();
+  }
+
+  public function getAllPagesVisits()
+  {
+    $list = array();
+    $result = $this->DB->query("SELECT `date`, `url`, `view`
+                                FROM `each_page_view`
+                                ORDER BY `date` DESC
+                                LIMIT 10000");
+
+    while($row = $result->fetch_assoc()){
+      $list[] = $row;
+    }
+    return $list;
+  }
+
+  public function getWebsiteVisits()
+  {
+    $list = array();
+    $result = $this->DB->query("SELECT `date`, `view`
+                                FROM `days_view`
+                                ORDER BY `date` DESC
+                                LIMIT 1000");
+    while($row = $result->fetch_assoc()){
+      $list[] = $row;
+    }
+    return $list;
   }
 }
 
