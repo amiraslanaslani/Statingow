@@ -1,3 +1,3 @@
 <?php
-echo $Statistics->periodProcess();
+$Statistics->periodProcess();
 ?>

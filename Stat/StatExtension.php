@@ -5,7 +5,7 @@ class StatExtension{
   public function getClientJS(){}
   public function doOnPeriodProcess($DatabaseConnection){}
   public function doOnSaveUserdata(){}
-  public function setAPIOutput(){}
+  public function setAPIOutput(& $output){}
 }
 
 ?>

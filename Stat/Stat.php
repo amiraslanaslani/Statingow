@@ -5,6 +5,12 @@ require_once __DIR__ . '/StatExtension.php';
 class Stat extends DatabaseConnected
 {
   private $Extensions = array();
+  private $DB;
+  
+  public function __construct($DB)
+  {
+    $this->DB = $DB;
+  }
 
   public function saveUserData(){
     foreach ($this->Extensions as $Extension) {
@@ -38,7 +44,7 @@ class Stat extends DatabaseConnected
   public function getApiOutput(){
     $output = array();
     foreach ($this->Extensions as $Extension) {
-      $Extension->setAPIOutput(&$output);
+      $Extension->setAPIOutput($output);
     }
     return json_encode($output);
   }
