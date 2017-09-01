@@ -6,8 +6,12 @@ $AuthUser = function($user, $pass){
 };
 
 $Auth = new BasicAuth($AuthUser);
-if($Auth->isAuthenticatedElseDoAuthenticate()){
+if($Auth->isAuthenticated()){
   echo $Statistics->getApiOutput();
   header('Content-Type: application/json');
+}
+else{
+  $Auth->unauthorized()
+       ->wantToBasicAuth();
 }
 ?>

@@ -2,11 +2,13 @@
 
 class BasicAuth
 {
-  private $auth = null;
+  private $auth;
+  private $realm;
 
-  public function __construct($authenticate = null)
+  public function __construct($authenticate = null,$realm = 'Statingow')
   {
     $this->auth = $authenticate;
+    $this->realm = $realm;
   }
 
   public function unauthorized(){
@@ -15,7 +17,7 @@ class BasicAuth
   }
 
   public function wantToBasicAuth(){
-    header('WWW-Authenticate: Basic realm="Statingow"');
+    header("WWW-Authenticate: Basic realm=\"{$this->realm}\"");
     return $this;
   }
 
@@ -32,15 +34,6 @@ class BasicAuth
       return true;
     else
       return false;
-  }
-
-  public function isAuthenticatedElseDoAuthenticate(){
-    if($this->isAuthenticated())
-      return true;
-      
-    $this->unauthorized()
-         ->wantToBasicAuth();
-    return false;
   }
 }
 
