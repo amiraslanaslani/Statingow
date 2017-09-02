@@ -21,8 +21,7 @@ class MainExtension extends StatExtension
                       FROM `tmp`
                       GROUP BY `url`");
 
-    echo 'All Removed From TMP';
-    //$this->DB->query("DELETE FROM `" + MainExtention::tmpTable + "` WHERE 1");
+    $this->DB->query("DELETE FROM `" . MainExtension::tmpTable . "` WHERE 1");
   }
 
   public function doOnSaveUserdata(){
