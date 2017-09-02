@@ -2,9 +2,7 @@
 require_once "Stat/BasicAuth.php";
 
 $AuthUser = function($user, $pass){
-  $u = 'aslan';
-  $p = '123';
-  if($user == $u && $pass == $p)
+  if($user == USERNAME && $pass == PASSWORD)
     return true;
   else
     return false;
