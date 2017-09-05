@@ -1,5 +1,6 @@
 # Statingow
 PHP Website Statistics Script
+Minimum Requirements: PHP 7.0
 
 ## How it works?
 System create a JS content (at "URL/?client") that loaded on pages and send information to the server (on "URL/?get"). After a period collected information on database is processed with an script that run from server and new information is saved in database again.

@@ -1,9 +1,10 @@
 <?php
-$DB = new mysqli( 'localhost',
-                  'root',
-                  '',
-                  'ghodsi_stat');
-                  
+const DATABASE = array(
+  'HOST' => 'localhost',
+  'USERNAME' => 'root',
+  'PASSWORD' => '',
+  'DATABASE' => 'ghodsi_stat'
+);
 const USERNAME = 'aslan';
 const PASSWORD = '123';
 ?>

@@ -1,7 +1,7 @@
 <?php
 class StatExtension{
-  public const tmpTable = 'tmp';
-  public const primaryTable = 'primary';
+  const tmpTable = 'tmp';
+  const primaryTable = 'primary';
   public function getClientJS(){}
   public function doOnPeriodProcess($DatabaseConnection){}
   public function doOnSaveUserdata(){}
