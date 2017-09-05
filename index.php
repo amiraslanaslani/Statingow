@@ -3,6 +3,7 @@ require_once "HttpExceptions.php";
 require_once "config.php";
 require_once "Stat/Stat.php";
 
+ob_start();
 try {
   $DB = @new mysqli( DATABASE['HOST'],
                      DATABASE['USERNAME'],
@@ -17,7 +18,7 @@ try {
 } catch (HttpException $e) {
   $e->showOutput();
 }
-
+ob_end_flush();
 
 
 ?>
